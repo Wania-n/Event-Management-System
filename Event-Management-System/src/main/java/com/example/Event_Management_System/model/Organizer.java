@@ -25,6 +25,7 @@ public class Organizer extends User {
     @Column(name = "DOB")
     private LocalDate DOB;
 
+    @OneToMany(mappedBy = "organizer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Organizer_ToDoList> todoLists = new ArrayList<>();
 
     // Default constructor

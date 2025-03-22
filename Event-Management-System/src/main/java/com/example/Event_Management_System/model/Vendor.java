@@ -14,6 +14,7 @@ public class Vendor extends ServiceProvider {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int serviceID;
 
+    @OneToMany(mappedBy = "vendor", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CuisineInfo> cuisineInfos = new ArrayList<>();
 
     // Constructor

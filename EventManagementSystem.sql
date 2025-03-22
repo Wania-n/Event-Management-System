@@ -101,4 +101,4 @@ create table Guest(
     foreign key (organizerID) references Organizer(userID)
 );
 
-
+show databases

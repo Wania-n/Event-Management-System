@@ -14,6 +14,7 @@ public class InteriorDesigner extends ServiceProvider{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int serviceID;
 
+    @OneToMany(mappedBy = "interiorDesigner", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ThemeInfo> themeInfos = new ArrayList<>();
 
     // Constructor
