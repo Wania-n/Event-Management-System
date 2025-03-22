@@ -92,6 +92,7 @@ create table Event(
 );
 
 create table Guest(
+	guestID int auto_increment primary key,
 	guest_name varchar(100),
     email varchar(100),
     eventID int,
