@@ -3,93 +3,62 @@ import React, { useState } from "react";
 import styles from "./Signup.module.css";
 
 // Input Field Component
-const InputField = ({ type, placeholder, name, value, onChange }) => {
+const InputField = ({ type, placeholder }) => {
   return (
     <div className={styles.inputWrapper}>
       <input
         type={type}
-        name={name} // Add the name attribute
         placeholder={placeholder}
         className={styles.formInput}
-        value={value}
-        onChange={onChange}
-        required
       />
     </div>
   );
 };
 
-// Saving the data from each field
 function Signup() {
-  // State for form fields
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-    phoneNo: "",
-    firstname: "",
-    lastname: "",
-    address: "",
-    dob: "",
-  });
+  const [dob, setDob] = useState("");
 
-  // Handle input changes
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  // Handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    console.log("Sending Data:", formData); // Debugging Log
-
-    try {
-      const response = await fetch("http://localhost:8080/api/organizer/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-        mode: "cors"
-      });
-
-      const data = await response.text();
-      console.log("Response from Server:", data); // Debugging Log
-      alert(data);
-    } catch (error) {
-      console.error("Error:", error);
-      alert("Failed to register.");
-    }
+  const handleDateChange = (e) => {
+    setDob(e.target.value);
   };
 
   return (
     <section className={styles.container}>
       <div className={styles.card}>
-        <form className={styles.formContainer} onSubmit={handleSubmit}>
+        <form className={styles.formContainer}>
           {/* Form Header */}
           <header>
-            <h1 className={styles.formTitle}>Create Account</h1>
+            <h1 className={styles.formTitle}>Create Admin Account</h1>
             <div className={styles.divider} />
             <h2 className={styles.formSubtitle}>SignUp</h2>
           </header>
 
           {/* Input Grid */}
           <div className={styles.inputGrid}>
-            <InputField type="text" placeholder="Username" name="username" value={formData.username} onChange={handleChange} />
-            <InputField type="email" placeholder="Email" name="email" value={formData.email} onChange={handleChange} />
-            <InputField type="password" placeholder="Password" name="password" value={formData.password} onChange={handleChange} />
-            <InputField type="tel" placeholder="Phone No." name="phoneNo" value={formData.phoneNo} onChange={handleChange} />
-            <InputField type="text" placeholder="First Name" name="firstname" value={formData.firstname} onChange={handleChange} />
-            <InputField type="text" placeholder="Address" name="address" value={formData.address} onChange={handleChange} />
-            <InputField type="text" placeholder="Last Name" name="lastname" value={formData.lastname} onChange={handleChange} />
+            <InputField type="text" placeholder="username" />
+            <InputField type="email" placeholder="email@" />
+            <InputField type="password" placeholder="password" />
+            <InputField type="tel" placeholder="phoneNo." />
+            <InputField type="text" placeholder="firstname" />
+            <InputField type="text" placeholder="address" />
+            <InputField type="text" placeholder="lastname" />
 
             {/* Date of Birth Field with Calendar */}
-            <InputField type="date" placeholder="DOB" name="dob" value={formData.dob} onChange={handleChange} />
+            <div className={styles.inputWrapper}>
+              <input
+                type="date"
+                placeholder="DOB"
+                className={`${styles.formInput} ${styles.dateInput}`}
+                value={dob}
+                onChange={handleDateChange}
+              />
+            </div>
           </div>
 
           {/* Form Actions */}
           <div className={styles.buttonContainer}>
-            <button type="button" className={styles.backButton}>Back</button>
-            <button type="submit" className={styles.createButton}>Create</button>
+            <button className={styles.backButton}>Back</button>
+            <button className={styles.createButton}>Create</button>
           </div>
         </form>
       </div>
