@@ -29,23 +29,28 @@ public class OrganizerController {
     @PostMapping("/signup")
     public ResponseEntity<String> registerOrganizer(@RequestBody Organizer organizer) {
 
-        // Right now just checking
+        // Checking for correct data passing
         if (organizer == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Nothing received!!");
+        }else {
+            // Log data for debugging
+            System.out.println("Received Organizer Data: " + organizer);
+            System.out.println("Organizer username: " + organizer.getUsername());
+            System.out.println("Organizer password: " + organizer.getPassword());
+            System.out.println("Organizer address: " + organizer.getAddress());
+            System.out.println("Organizer email: " + organizer.getEmail());
+            System.out.println("Organizer firstname: " + organizer.getFirstname());
+            System.out.println("Organizer lastname: " + organizer.getLastname());
+            System.out.println("Organizer phone: " + organizer.getPhone());
         }
 
-        // Log data for debugging
-        System.out.println("Received Organizer Data: " + organizer);
-
-        return ResponseEntity.ok("Organizer has data now!!!");
-
-        //boolean isSaved = organizerService.registerOrganizer(organizer);
-
-//        if (isSaved) {
-//            return ResponseEntity.ok("Organizer registered successfully!");
-//        } else {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to register organizer.");
-//        }
+        // Call the organizer service layer
+        boolean isSaved = organizerService.registerOrganizer(organizer);
+        if (isSaved) {
+            return ResponseEntity.ok("Organizer registered successfully!");
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to register organizer.");
+        }
     }
 
     // Login Organizer

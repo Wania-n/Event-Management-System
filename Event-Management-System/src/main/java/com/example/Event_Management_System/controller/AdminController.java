@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 // This is the admin controller, it will control the admins, venues, vendors and interior designers
 @RestController
-@RequestMapping("./admins")
+@RequestMapping("/api/admin")
 @CrossOrigin(origins = "http://localhost:3000")
 public class AdminController {
 

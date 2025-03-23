@@ -14,6 +14,8 @@ create table Organizer(
     DOB date
 );
 
+select * from Organizer;
+
 -- TODO-LIST for the Organizer
 create table Organizer_ToDoList(
 	organizerID int,

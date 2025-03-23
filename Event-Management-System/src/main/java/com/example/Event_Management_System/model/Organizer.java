@@ -56,6 +56,14 @@ public class Organizer extends User {
         return password;
     }
 
+    public LocalDate getDOB() {
+        return DOB;
+    }
+
+    public void setDOB(LocalDate DOB) {
+        this.DOB = DOB;
+    }
+
     // Adding ToDoLists here!
     public void add_Todos(Organizer_ToDoList list){
         todoLists.add(list);
