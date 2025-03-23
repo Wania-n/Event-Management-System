@@ -39,6 +39,23 @@ public class Organizer extends User {
         this.DOB = DOB;
     }
 
+    // Setter and getters
+    public void setUsername(String username){
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
     // Adding ToDoLists here!
     public void add_Todos(Organizer_ToDoList list){
         todoLists.add(list);
