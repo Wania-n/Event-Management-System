@@ -1,4 +1,5 @@
 package com.example.Event_Management_System.service;
+import com.example.Event_Management_System.dto.LoginRequest;
 import com.example.Event_Management_System.model.Organizer;
 import com.example.Event_Management_System.repository.OrganizerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class OrganizerService {
 
     // Add functions for the application funtionality accordingly!!
 
-    // SignUp Organizer
+    // SignUp  ------------------------------------------------------------
     public boolean registerOrganizer(Organizer new_organizer){
 
         // Now adding validation rules
@@ -49,6 +50,23 @@ public class OrganizerService {
         // If its correct then...
         organizerRepo.save(new_organizer);
         return true;
+    }
+
+    // Login ---------------------------------------------------
+    public boolean loginOrganizer(LoginRequest login){
+
+        // Now adding validation rules
+        String username_regex = "^[A-Za-z][A-Za-z0-9._]{2,19}$";
+        String password_regex = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d@#$%^&+=!]{6,20}$";
+
+        if (!login.getUsername().matches(username_regex)) {
+            return false;
+        } else if (!login.getPassword().matches(password_regex)) {
+            return false;
+        }
+
+        // If it's correct then...
+        return organizerRepo.existsbyUsernameandPassword(login.getUsername(), login.getPassword());
     }
 
 }

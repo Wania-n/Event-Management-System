@@ -1,4 +1,5 @@
 package com.example.Event_Management_System.controller;
+import com.example.Event_Management_System.dto.LoginRequest;
 import com.example.Event_Management_System.model.Organizer;
 import com.example.Event_Management_System.service.EventService;
 import com.example.Event_Management_System.service.GuestService;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:3000")
 public class OrganizerController {
 
+
+    // These are the respective references of Service ------------------
     @Autowired
     private OrganizerService organizerService;
 
@@ -23,7 +26,7 @@ public class OrganizerController {
     @Autowired
     private GuestService guestService;
 
-    // Add relevants functions here!
+    // Add relevants functions here! -----------------------------------
 
     // Sign up organizer
     @PostMapping("/signup")
@@ -54,8 +57,27 @@ public class OrganizerController {
     }
 
     // Login Organizer
-    //@PostMapping("/login")
+    @PostMapping("/login")
+    public ResponseEntity<String> loginOrganizer(@RequestBody LoginRequest login){
 
+        // Checking for data retrieval
+        if(login == null){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Nothing received!!");
+        }else{
+            // Log in  for debugging
+            System.out.println("Receiving Organizer Login data: " + login);
+            System.out.println("Organizer Username: " + login.getUsername());
+            System.out.println("Organizer Password: " + login.getPassword());
+        }
 
+        // Call the Organizer Layer
+        boolean isLogged = organizerService.loginOrganizer(login);
+        if(isLogged){
+            return ResponseEntity.ok("Organizer logged-in successfully!");
+        }else{
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to login organizer.");
+        }
+
+    }
 
 }

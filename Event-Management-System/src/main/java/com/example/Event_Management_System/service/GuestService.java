@@ -1,5 +1,5 @@
 package com.example.Event_Management_System.service;
-import com.example.Event_Management_System.repository.AdminRepository;
+import com.example.Event_Management_System.repository.GuestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 public class GuestService {
 
     @Autowired
-    private AdminRepository adminRepo;
+    private GuestRepository guestRepo;
 
     // Add functions for the application funtionality accordingly!!
 }
