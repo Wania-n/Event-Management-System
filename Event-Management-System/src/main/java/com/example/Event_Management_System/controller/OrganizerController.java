@@ -133,7 +133,7 @@ public class OrganizerController {
     }
 
     // Event-Related Functions here -----------------------------------
-    @PostMapping("/bookEvent")
-    public ResponseEntity<String> bookEvent(@)
+    //@PostMapping("/bookEvent")
+    //public ResponseEntity<String> bookEvent(@)
 
 }
