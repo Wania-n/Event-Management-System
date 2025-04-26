@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import styles from "./Signup.module.css";
+import styles from "./Signup.module.css"; // Keep your existing style file
+import { useNavigate } from "react-router-dom"; // Import navigate
 
 // Input Field Component
 const InputField = ({ type, placeholder, name, value, onChange }) => {
@@ -8,7 +9,7 @@ const InputField = ({ type, placeholder, name, value, onChange }) => {
     <div className={styles.inputWrapper}>
       <input
         type={type}
-        name={name} // Add the name attribute
+        name={name}
         placeholder={placeholder}
         className={styles.formInput}
         value={value}
@@ -19,9 +20,10 @@ const InputField = ({ type, placeholder, name, value, onChange }) => {
   );
 };
 
-// Saving the data from each field
+// Main Signup Component
 function Signup() {
-  // State for form fields
+  const navigate = useNavigate(); // Hook for navigation
+
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -42,7 +44,7 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("Sending Data:", formData); // Debugging Log
+    console.log("Sending Data:", formData);
 
     try {
       const response = await fetch("http://localhost:8080/api/organizer/signup", {
@@ -53,12 +55,17 @@ function Signup() {
       });
 
       const data = await response.text();
-      console.log("Response from Server:", data); // Debugging Log
+      console.log("Response from Server:", data);
       alert(data);
+      navigate("/"); // Navigate to home on success
     } catch (error) {
       console.error("Error:", error);
       alert("Failed to register.");
     }
+  };
+
+  const handleBack = () => {
+    navigate("/"); // Navigate back
   };
 
   return (
@@ -81,14 +88,12 @@ function Signup() {
             <InputField type="text" placeholder="First Name" name="firstname" value={formData.firstname} onChange={handleChange} />
             <InputField type="text" placeholder="Address" name="address" value={formData.address} onChange={handleChange} />
             <InputField type="text" placeholder="Last Name" name="lastname" value={formData.lastname} onChange={handleChange} />
-
-            {/* Date of Birth Field with Calendar */}
             <InputField type="date" placeholder="DOB" name="dob" value={formData.dob} onChange={handleChange} />
           </div>
 
           {/* Form Actions */}
           <div className={styles.buttonContainer}>
-            <button type="button" className={styles.backButton}>Back</button>
+            <button type="button" className={styles.backButton} onClick={handleBack}>Back</button>
             <button type="submit" className={styles.createButton}>Create</button>
           </div>
         </form>
