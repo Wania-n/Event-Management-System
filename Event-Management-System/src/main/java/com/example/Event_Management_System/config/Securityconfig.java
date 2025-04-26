@@ -21,7 +21,7 @@ public class Securityconfig {
                 .csrf(csrf -> csrf.disable()) // Disable CSRF for testing
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/organizer/signup").permitAll() // ✅ Allow signup requests
+                        .requestMatchers("/api/organizer/signup", "/api/organizer/login").permitAll()
                         .anyRequest().authenticated() // Other requests need authentication
                 )
                 .build();
@@ -30,7 +30,7 @@ public class Securityconfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:3000")); // Allow frontend
+        configuration.setAllowedOrigins(List.of("*"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);

@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface OrganizerRepository extends JpaRepository<Organizer, Integer> {
 
     // Implement all the custom queries here
-    boolean existsbyUsernameandPassword(String username, String password);
+    boolean existsByUsernameAndPassword(String username, String password);
 
 }

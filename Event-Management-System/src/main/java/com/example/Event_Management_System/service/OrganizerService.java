@@ -66,7 +66,7 @@ public class OrganizerService {
         }
 
         // If it's correct then...
-        return organizerRepo.existsbyUsernameandPassword(login.getUsername(), login.getPassword());
+        return organizerRepo.existsByUsernameAndPassword(login.getUsername(), login.getPassword());
     }
 
 }
